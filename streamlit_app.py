@@ -18,6 +18,52 @@ import urllib.request
 import json
 import plotly.express as px
 import matplotlib.pyplot as plt
+import yfinance as yf
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+from datetime import datetime
+import statsmodels.api as sm
+
+from sklearn.linear_model import LinearRegression
+from statsmodels.tsa.seasonal import seasonal_decompose
+from sklearn.model_selection import TimeSeriesSplit
+from sklearn.metrics import mean_squared_error
+
+!pip install statsforecast
+from statsforecast.models import HistoricAverage
+from statsforecast.models import Naive
+from statsforecast.models import RandomWalkWithDrift
+from statsforecast.models import SeasonalNaive
+from statsforecast.models import SimpleExponentialSmoothing
+from statsforecast.models import HoltWinters
+from statsforecast.models import AutoARIMA
+from statsforecast.models import ARIMA
+from statsforecast.models import GARCH
+from statsforecast.models import ARCH
+
+from statsmodels.graphics.tsaplots import plot_pacf
+from statsmodels.graphics.tsaplots import plot_acf
+
+from scipy.stats import shapiro
+from datetime import datetime
+import matplotlib.pyplot as plt
+from meteostat import Point, Daily
+
+from statsmodels.graphics.tsaplots import plot_pacf
+from statsmodels.graphics.tsaplots import plot_acf
+from statsmodels.tsa.statespace.sarimax import SARIMAX
+from statsmodels.tsa.holtwinters import ExponentialSmoothing
+from statsmodels.tsa.stattools import adfuller
+import matplotlib.pyplot as plt
+from tqdm import tqdm_notebook
+from itertools import product
+
+
+import warnings
+warnings.filterwarnings('ignore')
+
 
 st.set_page_config('Séries Tempoais', page_icon=	':chart_with_upwards_trend:')
 
@@ -48,20 +94,11 @@ def read_data():
                                           'Northwest Territories': np.int32,
                                           'Nunavut': np.int32})
 
-    return df, df.T
+    return df
 
-@st.cache_data
-def read_geojson():
-    JSON_URL = "https://raw.githubusercontent.com/marcopeix/streamlit-population-canada/master/data/canada.geojson"
-    with urllib.request.urlopen(JSON_URL) as res:
-        geo = json.load(res)
-
-    return geo
-
-df, geo_df = read_data()
+df= read_data()
 if df not in st.session_state:
     st.session_state['df'] = df
-geo = read_geojson()
 st.write(df)
 
 col1, col2 = st.columns(2)

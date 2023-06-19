@@ -1,2 +1,14 @@
 plotly
 matplotlib
+yfinance
+pandas
+numpy
+matplotlib
+seaborn
+datetime
+statsmodels
+scikit-learn
+statsforecast
+scipy
+meteostat
+tqdm
