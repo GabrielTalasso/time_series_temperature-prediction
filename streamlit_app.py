@@ -99,9 +99,9 @@ if data not in st.session_state:
     st.session_state['df'] = data
 
 
-tab1, tab2, tab3 = st.tabs(["Tabela dos dados", 
-                      "Grafico da Série", 
-                      "Grafico Diferenciada"])
+tab1, tab2, tab3 = st.tabs([ "Grafico da Série", 
+                      "Grafico Diferenciada",
+                      "Tabela dos dados"])
 
 with tab1:
     fig = px.line(returns, title='Temperatura Média Diária', 
