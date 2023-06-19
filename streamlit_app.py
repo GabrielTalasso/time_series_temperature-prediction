@@ -104,16 +104,16 @@ tab1, tab2, tab3 = st.tabs(["Tabela dos dados",
                       "Grafico Diferenciada"])
 
 with tab1:
-    st.write(data)
-
-with tab2:
     fig = px.line(returns, title='Temperatura Média Diária', 
                   labels=({'value':'Temperatura Média', 'time':'Data'}))
     fig.update_layout(showlegend=False)
     st.plotly_chart(fig)
 
-with tab3:
+with tab2:
     fig = px.line(returns.diff(1).dropna(), title='Temperatura Média Diária - Diferenciada',
                   labels = {'value':'Diferença da temperatura', 'time':'Data'})
     fig.update_layout(showlegend=False)
     st.plotly_chart(fig)
+
+with tab3:
+    st.write(data)
