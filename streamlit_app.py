@@ -59,6 +59,9 @@ import matplotlib.pyplot as plt
 from tqdm import tqdm_notebook
 from itertools import product
 
+from funcoes_modelos import montar_dataframe_temp
+from funcoes_modelos import predict_ARIMA_GARCH
+from funcoes_modelos import return_exog
 
 import warnings
 warnings.filterwarnings('ignore')
@@ -70,7 +73,7 @@ with st.sidebar:
     st.markdown("# ME607")
     st.markdown("Estas são as abas disponíveis para mais detalhes sobre as análises e modelagem dos dados:")
 
-st.title('Trabalho Final Séries Temporais')
+st.title(':chart_with_upwards_trend: Trabalho Final Séries Temporais' )
 st.subheader('Grupo: Gabriel Ukstin Talasso - 235078 ; ....')
 st.markdown("## Visão geral dos dados")
 st.markdown("### Alterne entre as abas para as visualizações")
@@ -117,3 +120,104 @@ with tab2:
 
 with tab3:
     st.write(data)
+
+st.markdown('### Para um vislumbre da dinâmica dos dados, a seguir podemos ver os seguintes gráficos:')
+
+tab1, tab2, tab3, tab4 = st.tabs([ "ACF - Original", 
+                      "PACF - Original",
+                      "ACF - Diferenciada",
+                      "PACF - DIferenciada"])
+with tab1:
+    st.write(plot_acf(returns, lags = 400))
+with tab2:
+    st.write(plot_pacf(returns, lags = 400))
+with tab3:
+    st.write(plot_acf(returns.diff(1).dropna(), lags = 400))
+with tab4:
+    st.write(plot_acf(returns.diff(1).dropna(), lags = 400))
+
+st.markdown('### Modelagem')
+st.markdown('#### Preencha as entradas necessárias e aperte o botão para testar diversos modelos: ')
+st.markdown('Também estão disponíveis modelos de volatilidade, implementados para avaliação de seu comportamento, apesar de não serem úteis nesse caso.')
+
+n_cv = st.number_input('Número de splits na validação cruzada:',
+                        min_value = 2, max_value=20)
+
+ar = st.number_input('Grau da parte AR do modelo a ser testado:',
+                     min_value = 1, max_value=20)
+ma = st.number_input('Grau da parte MA do modelo a ser testado:',
+                     min_value = 1, max_value=20)
+d = st.number_input('Grau de diferenciação:',
+                     min_value = 1, max_value=20)
+
+modelos = [HistoricAverage(),
+           Naive(),
+          # SeasonalNaive(365),
+          # SeasonalNaive(30),
+           RandomWalkWithDrift(),
+           SimpleExponentialSmoothing(0.9),
+           #HoltWinters(season_length=180, error_type='A'),
+           #HoltWinters(season_length=30, error_type='A') ,
+           AutoARIMA(),
+           ARCH(p = 1),
+           ARCH(p = 2),
+           GARCH(1,1),
+           GARCH(2,2),
+           [AutoARIMA(), GARCH(2, 2)],
+           #SARIMAX(returns.values, order=(1,1,1), seasonal_order=(1,1,1, 365)),
+           ARIMA(order = (ar,d,ma)),
+           'ourmodel'
+           ]
+
+
+model_names = ['Media', 'Naive', 'Drift','ExpSmo', #'HoltWin180','HoltWin30',
+               'AutoARIMA','ARCH1','ARCH2', 'GARCH11', 'GARCH22', 'ARIMA-GARCH',
+               'Seu ARIMA', 'Nosso Modelo']
+
+
+b = st.button('Rodar Modelos')
+if b:
+    tscv = TimeSeriesSplit(n_splits = n_cv, max_train_size= 180)
+    erros = pd.DataFrame(columns = ['Model', 'm5_rmse'])
+
+    n = 1
+
+    for i, model in enumerate(modelos):
+
+        model_name = model_names[i]
+        rmse = []
+
+        for train_index, test_index in tscv.split(returns):
+            cv_train, cv_test = returns.iloc[train_index], returns.iloc[test_index]
+
+            if model_name == 'ARIMA-GARCH':
+
+                temp_train = montar_dataframe_temp(cv_train)
+
+                predictions = predict_ARIMA_GARCH(model, temp_train, n)
+
+            elif model_name == 'Nosso Modelo':
+
+                temp_train = montar_dataframe_temp(cv_train)
+
+                sarimax = sm.tsa.statespace.SARIMAX(temp_train['tavg'] , order=(1,1,1) , exog = temp_train[['precip_ontem', 'precip_media_semana']],
+                                        enforce_stationarity=False, enforce_invertibility=False, freq='D', ).fit()
+
+                predictions = sarimax.forecast(n, exog = return_exog(temp_train, n).values).values
+
+            else:
+                model = model.fit(cv_train.values)
+
+                predictions = model.predict(n)
+                predictions = predictions['mean']#[0]
+
+
+            true_values = cv_test.values[0:n]
+            rmse.append(np.sqrt(mean_squared_error(true_values, predictions)))
+
+
+        erros = pd.concat([erros, pd.DataFrame([{'Model': model_name,'m5_rmse': np.mean(rmse)}])],
+                                  ignore_index = True)
+        
+    st.markdown('#### RMSE dos modelos (ordenado):')
+    erros.sort_values('m5_rmse').T
