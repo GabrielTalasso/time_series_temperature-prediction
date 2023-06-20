@@ -167,19 +167,20 @@ modelos = [HistoricAverage(),
            GARCH(2,2),
            [AutoARIMA(), GARCH(2, 2)],
            #SARIMAX(returns.values, order=(1,1,1), seasonal_order=(1,1,1, 365)),
-           ARIMA(order = (ar,d,ma))
+           ARIMA(order = (ar,d,ma)),
+           ARIMA(order = (1,1,1), seasonal_order = (1,1,1), season_length = 1)
            ]
 
 
 model_names = ['Media', 'Naive', 'Drift','ExpSmo', #'HoltWin180','HoltWin30',
                'AutoARIMA','ARCH1','ARCH2', 'GARCH11', 'GARCH22', 'ARIMA-GARCH',
-               'Seu ARIMA']
+               'Seu ARIMA', 'sarima']
 
 c = st.checkbox('Rodar nosso modelo conjuntamente.')
 if c:
     modelos.append('ourmodel')
     model_names.append('Nosso Modelo')
-    st.error('Atenção, isso pode demorar um pouco.')
+    st.error('Atenção! Isso pode demorar um pouco.')
 
 
 b = st.button('Rodar Modelos')
@@ -208,8 +209,8 @@ if b:
 
                 temp_train = montar_dataframe_temp(cv_train)
 
-                sarimax = sm.tsa.statespace.SARIMAX(temp_train['tavg'] , order=(1,1,1), seasonal_order=(1,0,1,180) , exog = temp_train[['precip_ontem', 'precip_media_semana']],
-                                        enforce_stationarity=False, enforce_invertibility=False, freq='D').fit(low_memory=True, cov_type='none')
+                sarimax = sm.tsa.statespace.SARIMAX(temp_train['tavg'] , order=(1,1,1), exog = temp_train[['precip_ontem', 'precip_media_semana']],
+                                        enforce_stationarity=False, enforce_invertibility=False, freq='D', simple_differencing=True).fit(low_memory=True, cov_type='none')
 
                 predictions = sarimax.forecast(n, exog = return_exog(temp_train, n).values).values
 
