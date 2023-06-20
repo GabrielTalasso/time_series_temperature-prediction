@@ -143,6 +143,8 @@ st.markdown('Também estão disponíveis modelos de volatilidade, implementados 
 n_cv = st.number_input('Número de splits na validação cruzada:',
                         min_value = 2, max_value=20)
 
+st.markdown('#### Faça o seu modelo ARIMA para testar:')
+
 ar = st.number_input('Grau da parte AR do modelo a ser testado:',
                      min_value = 1, max_value=20)
 ma = st.number_input('Grau da parte MA do modelo a ser testado:',
@@ -165,19 +167,25 @@ modelos = [HistoricAverage(),
            GARCH(2,2),
            [AutoARIMA(), GARCH(2, 2)],
            #SARIMAX(returns.values, order=(1,1,1), seasonal_order=(1,1,1, 365)),
-           ARIMA(order = (ar,d,ma)),
-           'ourmodel'
+           ARIMA(order = (ar,d,ma))
            ]
 
 
 model_names = ['Media', 'Naive', 'Drift','ExpSmo', #'HoltWin180','HoltWin30',
                'AutoARIMA','ARCH1','ARCH2', 'GARCH11', 'GARCH22', 'ARIMA-GARCH',
-               'Seu ARIMA', 'Nosso Modelo']
+               'Seu ARIMA']
+
+c = st.checkbox('Rodar nosso modelo conjuntamente.')
+if c:
+    modelos.append('ourmodel')
+    model_names.append('Nosso Modelo')
+    st.error('Atenção, isso pode demorar um pouco.')
 
 
 b = st.button('Rodar Modelos')
+
 if b:
-    tscv = TimeSeriesSplit(n_splits = n_cv, max_train_size= 180)
+    tscv = TimeSeriesSplit(n_splits = n_cv, max_train_size= 300)
     erros = pd.DataFrame(columns = ['Model', 'm5_rmse'])
 
     n = 1
@@ -200,8 +208,8 @@ if b:
 
                 temp_train = montar_dataframe_temp(cv_train)
 
-                sarimax = sm.tsa.statespace.SARIMAX(temp_train['tavg'] , order=(1,1,1) , exog = temp_train[['precip_ontem', 'precip_media_semana']],
-                                        enforce_stationarity=False, enforce_invertibility=False, freq='D', ).fit()
+                sarimax = sm.tsa.statespace.SARIMAX(temp_train['tavg'] , order=(1,1,1), seasonal_order=(1,0,1,180) , exog = temp_train[['precip_ontem', 'precip_media_semana']],
+                                        enforce_stationarity=False, enforce_invertibility=False, freq='D').fit(low_memory=True, cov_type='none')
 
                 predictions = sarimax.forecast(n, exog = return_exog(temp_train, n).values).values
 
