@@ -194,7 +194,7 @@ from tscv import TimeBasedCV
 if b:
     print(len(data))
     #tscv = TimeSeriesSplit(n_splits = n_cv, max_train_size= 740, )
-    tscv = TimeBasedCV(train_period= 4910,
+    tscv = TimeBasedCV(train_period= len(data) - n_cv,
                    test_period=1,
                    freq='days')
     erros = pd.DataFrame(columns = ['Model', 'm5_rmse'])
