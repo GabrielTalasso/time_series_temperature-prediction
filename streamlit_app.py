@@ -128,13 +128,14 @@ tab1, tab2, tab3, tab4 = st.tabs([ "ACF - Original",
                       "ACF - Diferenciada",
                       "PACF - DIferenciada"])
 with tab1:
-    st.write(plot_acf(returns, lags = 400))
+    st.write(plot_acf(returns, lags = 400, zero = False))
 with tab2:
-    st.write(plot_pacf(returns, lags = 400))
+    st.write(plot_pacf(returns, lags = 400, zero = False))
+
 with tab3:
-    st.write(plot_acf(returns.diff(1).dropna(), lags = 400))
+    st.write(plot_acf(returns.diff(1).dropna(), lags = 400, zero = False))
 with tab4:
-    st.write(plot_acf(returns.diff(1).dropna(), lags = 400))
+    st.write(plot_pacf(returns.diff(1).dropna(), lags = 400, zero = False, ))
 
 st.markdown('### Modelagem')
 st.markdown('#### Preencha as entradas necessárias e aperte o botão para testar diversos modelos: ')
