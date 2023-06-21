@@ -169,7 +169,7 @@ modelos = [HistoricAverage(),
            [AutoARIMA(), GARCH(2, 2)],
            #SARIMAX(returns.values, order=(1,1,1), seasonal_order=(1,1,1, 365)),
            ARIMA(order = (ar,d,ma)),
-           ARIMA(order = (1,1,1), seasonal_order = (1,0,1), season_length = 1)
+           ARIMA(order = (3,0,0), seasonal_order = (0,1,0), season_length = 3)
            ]
 
 
@@ -186,18 +186,25 @@ if c:
 
 b = st.button('Rodar Modelos')
 
-if b:
-    tscv = TimeSeriesSplit(n_splits = n_cv, max_train_size= 740)
-    erros = pd.DataFrame(columns = ['Model', 'm5_rmse'])
+datatrain = data.reset_index()[['time', 'tavg']]
+datatrain['time'] = pd.to_datetime(datatrain['time'])
 
+from tscv import TimeBasedCV
+
+if b:
+    print(len(data))
+    #tscv = TimeSeriesSplit(n_splits = n_cv, max_train_size= 740, )
+    tscv = TimeBasedCV(train_period= 4910,
+                   test_period=1,
+                   freq='days')
+    erros = pd.DataFrame(columns = ['Model', 'm5_rmse'])
     n = 1
 
     for i, model in enumerate(modelos):
 
         model_name = model_names[i]
         rmse = []
-
-        for train_index, test_index in tscv.split(returns):
+        for train_index, test_index in tscv.split(data = datatrain , date_column='time'):
             cv_train, cv_test = returns.iloc[train_index], returns.iloc[test_index]
 
             if model_name == 'ARIMA-GARCH':
@@ -210,10 +217,10 @@ if b:
 
                 temp_train = montar_dataframe_temp(cv_train)
 
-                sarimax = sm.tsa.statespace.SARIMAX(temp_train['tavg'] , order=(1,1,1), exog = temp_train[['precip_ontem', 'precip_media_semana']],
+                sarimax = sm.tsa.statespace.SARIMAX(temp_train['tavg'] , order=(3,0,1), exog = temp_train[['precip_ontem', 'precip_media_semana']],
                                         enforce_stationarity=False, enforce_invertibility=False, freq='D', simple_differencing=True).fit(low_memory=True, cov_type='none')
                 
-                #mod = sm.tsa.arima.ARIMA(temp_train['tavg'], order=(1, 1, 1))
+                #mod = sm.tsa.arima.ARIMA(temp_train['tavg'], order=(3, 0, 1), seasonal_order=(0,1,0,365))
                 #res = mod.fit(method='innovations_mle', low_memory=True, cov_type='none')
 
                 predictions = sarimax.forecast(n, exog = return_exog(temp_train, n).values).values
@@ -234,3 +241,4 @@ if b:
         
     st.markdown('#### RMSE dos modelos (ordenado):')
     erros.sort_values('m5_rmse').T
+

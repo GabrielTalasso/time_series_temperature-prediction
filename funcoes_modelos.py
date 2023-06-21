@@ -81,7 +81,7 @@ def predict_ARIMA_GARCH(models, temp_train, n):
   model = models[0]
   model2 = models[1]
 
-  sarimax = sm.tsa.statespace.SARIMAX(temp_train['tavg'] , order=(1,1,1),
+  sarimax = sm.tsa.statespace.SARIMAX(temp_train['tavg'] , order=(1,0,1),
                                 enforce_stationarity=False, enforce_invertibility=False, freq='D').fit()
 
   resid = sarimax.resid.values
