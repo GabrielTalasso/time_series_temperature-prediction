@@ -168,7 +168,7 @@ modelos = [HistoricAverage(),
            [AutoARIMA(), GARCH(2, 2)],
            #SARIMAX(returns.values, order=(1,1,1), seasonal_order=(1,1,1, 365)),
            ARIMA(order = (ar,d,ma)),
-           ARIMA(order = (1,1,1), seasonal_order = (1,1,1), season_length = 180)
+           ARIMA(order = (1,1,1), seasonal_order = (1,0,1), season_length = 1)
            ]
 
 
@@ -186,7 +186,7 @@ if c:
 b = st.button('Rodar Modelos')
 
 if b:
-    tscv = TimeSeriesSplit(n_splits = n_cv, max_train_size= 600)
+    tscv = TimeSeriesSplit(n_splits = n_cv, max_train_size= 740)
     erros = pd.DataFrame(columns = ['Model', 'm5_rmse'])
 
     n = 1
@@ -211,9 +211,12 @@ if b:
 
                 sarimax = sm.tsa.statespace.SARIMAX(temp_train['tavg'] , order=(1,1,1), exog = temp_train[['precip_ontem', 'precip_media_semana']],
                                         enforce_stationarity=False, enforce_invertibility=False, freq='D', simple_differencing=True).fit(low_memory=True, cov_type='none')
+                
+                #mod = sm.tsa.arima.ARIMA(temp_train['tavg'], order=(1, 1, 1))
+                #res = mod.fit(method='innovations_mle', low_memory=True, cov_type='none')
 
                 predictions = sarimax.forecast(n, exog = return_exog(temp_train, n).values).values
-
+                #predictions = res.forecast(n).values
             else:
                 model = model.fit(cv_train.values)
 
