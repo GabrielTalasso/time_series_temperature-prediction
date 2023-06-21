@@ -168,7 +168,7 @@ modelos = [HistoricAverage(),
            [AutoARIMA(), GARCH(2, 2)],
            #SARIMAX(returns.values, order=(1,1,1), seasonal_order=(1,1,1, 365)),
            ARIMA(order = (ar,d,ma)),
-           ARIMA(order = (1,1,1), seasonal_order = (1,1,1), season_length = 1)
+           ARIMA(order = (1,1,1), seasonal_order = (1,1,1), season_length = 180)
            ]
 
 
@@ -186,7 +186,7 @@ if c:
 b = st.button('Rodar Modelos')
 
 if b:
-    tscv = TimeSeriesSplit(n_splits = n_cv, max_train_size= 300)
+    tscv = TimeSeriesSplit(n_splits = n_cv, max_train_size= 600)
     erros = pd.DataFrame(columns = ['Model', 'm5_rmse'])
 
     n = 1
