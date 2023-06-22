@@ -109,19 +109,27 @@ tab1, tab2, tab3 = st.tabs([ "Grafico da Série",
                       "Tabela dos dados"])
 
 with tab1:
-    fig = px.line(returns, title='Temperatura Média Diária', 
+    fig = px.line(returns, title='Temperatura Média Diária - Vancouver', 
                   labels=({'value':'Temperatura Média', 'time':'Data'}))
     fig.update_layout(showlegend=False)
     st.plotly_chart(fig)
 
 with tab2:
-    fig = px.line(returns.diff(1).dropna(), title='Temperatura Média Diária - Diferenciada',
+    fig = px.line(returns.diff(1).dropna(), title='Temperatura Média Diária - Vancouver - Diferenciada',
                   labels = {'value':'Diferença da temperatura', 'time':'Data'})
     fig.update_layout(showlegend=False)
     st.plotly_chart(fig)
 
 with tab3:
     st.write(data.tail(10))
+
+c0 = st.checkbox('Mais informações sobre os dados.', help = 'Clique para saber mais sobre os dados do projeto.')
+
+if c0:
+
+    st.markdown('Esses dados foram coletados a partir da biblioteca meteostat, do python, que fornece informações acerca do clima de diversos pontos do mundo.')
+    st.markdown('Nesse caso a cidade escolhida foi Vancouver, por conta da quantidade de dados disponíveis e ausência de falahas na coleta (como apresntadas em Campinas em São Paulo).')
+    st.markdown('O foco do trabalho é predizer a temperatura média do dia seguinte, usando as temperaturas anteriores e com auxílio da variável precipitação. Outras variáveis não foram consideradas ou por se mostrarem ineficiẽntes, ou por possírem muitos valores faltantes.')
 
 st.markdown('### Para um vislumbre da dinâmica dos dados, a seguir podemos ver os seguintes gráficos:')
 
@@ -144,7 +152,7 @@ with tab4:
     st.image(image = image)
 
 st.markdown('### Modelagem')
-st.markdown(' A seguir podemos ver a modelagem de diversos tipos de modelos, comparados atravez de uma validação cruzada de janela deslizante.')
+st.markdown(' A seguir podemos ver o resulado do teste de diversos modelos, comparados atravez de uma validação cruzada de janela deslizante.')
 st.markdown(' Cada modelo foi testado 30 vezes, predizedo sempre um passo a frente a raiz do erro quadratico médio (RMSE) de cada um pode ser visto na tabela abaixo')
 
 results = pd.read_csv('comparacao_cv_30.csv').T
@@ -165,18 +173,22 @@ with col2:
 with col3:
     st.write(' ')
 
-
-st.write('O melhor modelo encontrado foi um SARIMA(1,1,3)(0,1,1)7, que desempenhou melhor nos nossos testes. '+
-            'Além disso, o segundo melhor modelo foi um ARIMAX(1,0,1), usando a precipitação do dia anterior e a média da precipitação semanal como covariáveis.')
-st.markdown('OBS: Outros modelos também foram testados mas não mostrados na tabela, os apresentados são os modelos de cada tipo que tiveram melhor desempenho nos testes realizados. Modelos com período sazonal 365 dias ou não bateram os baselines ou demoravam horas para rodar, por isso foram descartados de uma anpalise diária.')
+c1 = st.checkbox('Mostrar mais sobre os testes.', help = 'Clique para mais informações a cerca dos experimentos para testes de modelos.')
+if c1:
+    st.write('O melhor modelo encontrado foi um SARIMA(1,1,3)(0,1,1)7, que desempenhou melhor nos nossos testes. '+
+                'Além disso, o segundo melhor modelo foi um ARIMAX(1,0,1), usando a precipitação do dia anterior e a média da precipitação semanal como covariáveis.')
+    st.markdown('OBS: Outros modelos também foram testados mas não mostrados na tabela, os apresentados são os modelos de cada tipo que tiveram melhor desempenho nos testes realizados. Modelos com período sazonal 365 dias ou não bateram os baselines ou demoravam horas para rodar, por isso foram descartados de uma anpalise diária.')
 
 st.markdown('### Diagnóstico do modelo: SARIMA(1,1,3)(0,1,1)7')
 
 image = Image.open('sarima_diags.png')
 st.image(image = image, caption='Diagnóstico do modelo. Rejeita-se normalidade dos resíduos à 5%.')
 
-st.markdown('Mesmo esse sendo o melhor modelo nos testes visualmente adequado nos gráficos. Ainda rejeitamos a normalidade dos resíduos, ou seja, o modelo ainda ainda não capturou complemente a dinâmica dos dados.')
-st.markdown('OBS: Por se tratar de um problema complexo e que envolve muitas variáveis não disponóveis, nenhum dos modelos testados obteve resíduos normais.')
+c2 = st.checkbox('Mostrar mais sobre o diagnóstico.', help = 'Clique para mais informações a cerca do diagnóstico do modelo.')
+
+if c2:
+    st.markdown('Mesmo esse sendo o melhor modelo nos testes visualmente adequado nos gráficos. Ainda rejeitamos a normalidade dos resíduos, ou seja, o modelo ainda ainda não capturou complemente a dinâmica dos dados.')
+    st.markdown('OBS: Por se tratar de um problema complexo e que envolve muitas variáveis não disponíveis, nenhum dos modelos testados obteve resíduos normais.')
 
 
 
