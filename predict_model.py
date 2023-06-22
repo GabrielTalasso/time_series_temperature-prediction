@@ -78,10 +78,14 @@ def read_data():
 
 data = read_data()
 returns = data['tavg']
+print(returns.tail(1))
 
-model = sarimax = sm.tsa.statespace.SARIMAX(returns , order=(1,1,3), seasonal_order=(0,1,1,7),
-                                    enforce_stationarity=False, enforce_invertibility=False, freq='D').fit()
+model =  sm.tsa.statespace.SARIMAX(returns , order=(1,1,3), seasonal_order=(0,1,1,7),
+                                    enforce_stationarity=False, enforce_invertibility=False, freq='D')
+model = model.fit()
 
 
 pred = model.forecast(1)
+print(returns.tail(1))
 print(pred)
+print(model.summary())
