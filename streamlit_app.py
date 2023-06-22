@@ -81,7 +81,6 @@ st.subheader('Grupo: Gabriel Ukstin Talasso - 235078 ; ....')
 st.markdown("## Visão geral dos dados")
 st.markdown("### Alterne entre as abas para as visualizações")
 
-@st.cache_data
 def read_data():
         # Set time period
     start = datetime(2010, 1, 1)
