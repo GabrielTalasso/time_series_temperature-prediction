@@ -74,6 +74,7 @@ st.set_page_config('Séries Tempoais', page_icon=	':chart_with_upwards_trend:')
 with st.sidebar:
     st.markdown("# ME607")
     st.markdown("A seguir podem ser encontrados alguns links útis referente ao trabalho aqui apresentado:")
+    st.markdown('[Github](https://github.com/GabrielTalasso/trabalho-series)')
 
 st.title(':chart_with_upwards_trend: Trabalho Final Séries Temporais' )
 st.error('Aguarde o simbolo de "Running" no canto superior para a visualização completa.')
