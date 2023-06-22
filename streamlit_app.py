@@ -79,7 +79,7 @@ st.title(':chart_with_upwards_trend: Trabalho Final Séries Temporais' )
 st.error('Aguarde o simbolo de "Running" no canto superior para a visualização completa.')
 st.subheader('Grupo: Gabriel Ukstin Talasso - 235078 ; ....')
 st.markdown("## Visão geral dos dados")
-st.markdown("### Alterne entre as abas para as visualizações")
+st.markdown("### Alterne entre as abas para as visualizações!")
 
 def read_data():
         # Set time period
@@ -144,8 +144,8 @@ with tab4:
     st.image(image = image)
 
 st.markdown('### Modelagem')
-st.markdown('#### A seguir podemos ver a modelagem de diversos tipos de modelos, comparados atravez de uma validação cruzada de janela deslizante.')
-st.markdown('#### Cada modelo foi testado 30 vezes, predizedo sempre um passo a frente a raiz do erro quadratico médio (RMSE) de cada um pode ser visto na tabela abaixo')
+st.markdown(' A seguir podemos ver a modelagem de diversos tipos de modelos, comparados atravez de uma validação cruzada de janela deslizante.')
+st.markdown(' Cada modelo foi testado 30 vezes, predizedo sempre um passo a frente a raiz do erro quadratico médio (RMSE) de cada um pode ser visto na tabela abaixo')
 
 results = pd.read_csv('comparacao_cv_30.csv').T
 results = results.replace({'Seu ARIMA': 'ARIMA111', 'm5_rmse':'RMSE', 'sarima': 'SARIMA'})
