@@ -76,8 +76,18 @@ def read_data():
 
     return data
 
+
 data = read_data()
 returns = data['tavg']
+
+plot_acf(returns, lags = 400, zero = False)
+plt.show()
+plot_pacf(returns, lags = 400, zero = False)
+plt.show()
+plot_acf(returns.diff(1).dropna(), lags = 400, zero = False)
+plt.show()
+plot_pacf(returns.diff(1).dropna(), lags = 400, zero = False)
+plt.show()
 
 model = sarimax = sm.tsa.statespace.SARIMAX(returns , order=(1,1,3), seasonal_order=(0,1,1,7),
                                     enforce_stationarity=False, enforce_invertibility=False, freq='D').fit()

@@ -130,14 +130,18 @@ tab1, tab2, tab3, tab4 = st.tabs([ "ACF - Original",
                       "ACF - Diferenciada",
                       "PACF - DIferenciada"])
 with tab1:
-    st.write(plot_acf(returns, lags = 400, zero = False))
+    image = Image.open('acf.png')
+    st.image(image = image)
 with tab2:
-    st.write(plot_pacf(returns, lags = 400, zero = False))
+    image = Image.open('pacf.png')
+    st.image(image = image)
 
 with tab3:
-    st.write(plot_acf(returns.diff(1).dropna(), lags = 400, zero = False))
+    image = Image.open('acfdiff.png')
+    st.image(image = image)
 with tab4:
-    st.write(plot_pacf(returns.diff(1).dropna(), lags = 400, zero = False, ))
+    image = Image.open('pacfdiff.png')
+    st.image(image = image)
 
 st.markdown('### Modelagem')
 st.markdown('#### A seguir podemos ver a modelagem de diversos tipos de modelos, comparados atravez de uma validação cruzada de janela deslizante.')
