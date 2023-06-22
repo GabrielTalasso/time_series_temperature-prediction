@@ -122,7 +122,7 @@ with tab2:
     st.plotly_chart(fig)
 
 with tab3:
-    st.write(data)
+    st.write(data.tail(10))
 
 st.markdown('### Para um vislumbre da dinâmica dos dados, a seguir podemos ver os seguintes gráficos:')
 
