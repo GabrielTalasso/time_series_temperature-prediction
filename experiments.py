@@ -111,7 +111,7 @@ datatrain = data.reset_index()[['time', 'tavg']]
 datatrain['time'] = pd.to_datetime(datatrain['time'])
 
 from tscv import TimeBasedCV
-n_cv = 30
+n_cv = 5
 
 #tscv = TimeSeriesSplit(n_splits = n_cv, max_train_size= 740, )
 tscv = TimeBasedCV(train_period= len(data) - n_cv,
@@ -161,4 +161,4 @@ for i, model in enumerate(modelos):
 
 
 print(erros.sort_values('m5_rmse').T)
-erros.sort_values('m5_rmse').T.to_csv(f'comparação_cv_{n_cv}.csv')
+erros.sort_values('m5_rmse').T.to_csv(f'comparacao_cv_{n_cv}.csv')

@@ -138,6 +138,23 @@ with tab4:
     st.write(plot_pacf(returns.diff(1).dropna(), lags = 400, zero = False, ))
 
 st.markdown('### Modelagem')
-st.markdown('#### A seguir podemos ver a modelagem de diversos tipos de modelos, comparados atravez de uma validação cruzada de janela deslizante ')
-st.markdown('#### Cada modelo foi testado 10 vezes, predizedo sempre um passo a frente a raiz do erro quadratico médio (RMSE) de cada um pode ser visto na tabela abaixo')
+st.markdown('#### A seguir podemos ver a modelagem de diversos tipos de modelos, comparados atravez de uma validação cruzada de janela deslizante.')
+st.markdown('#### Cada modelo foi testado 30 vezes, predizedo sempre um passo a frente a raiz do erro quadratico médio (RMSE) de cada um pode ser visto na tabela abaixo')
 
+results = pd.read_csv('comparacao_cv_30.csv').T
+results = results.replace({'Seu ARIMA': 'ARIMA111', 'm5_rmse':'RMSE', 'sarima': 'SARIMA'})
+results.columns = results.iloc[0]
+results = results.drop(results.index[0])
+results = results.set_index('Model')
+results['RMSE'] = results['RMSE'].apply(lambda x: round(float(x), 3))
+
+col1, col2, col3 = st.columns(3)
+
+with col1:
+    st.write(' ')
+
+with col2:
+    st.write(results)
+
+with col3:
+    st.write(' ')
