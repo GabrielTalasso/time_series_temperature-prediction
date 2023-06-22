@@ -63,6 +63,8 @@ from funcoes_modelos import montar_dataframe_temp
 from funcoes_modelos import predict_ARIMA_GARCH
 from funcoes_modelos import return_exog
 
+from PIL import Image
+
 import warnings
 warnings.filterwarnings('ignore')
 
@@ -158,3 +160,21 @@ with col2:
 
 with col3:
     st.write(' ')
+
+
+st.write('O melhor modelo encontrado foi um SARIMA(1,1,3)(0,1,1)7, que desempenhou melhor nos nossos testes. '+
+            'Além disso, o segundo melhor modelo foi um ARIMAX(1,0,1), usando a precipitação do dia anterior e a média da precipitação semanal como covariáveis.')
+st.markdown('OBS: Outros modelos também foram testados mas não mostrados na tabela, os apresentações são os modelos de cada tipo que tiverem melhor desempenho nos testes realizados.')
+
+st.markdown('### Diagnóstico do modelo: SARIMA(1,1,3)(0,1,1)7')
+
+image = Image.open('sarima_diags.png')
+st.image(image = image, caption='Diagnóstico do modelo. Rejeita-se normalidade dos resíduos à 5%.')
+
+st.markdown('Mesmo esse sendo o melhor modelo nos testes visualmente adequado nos gráficos. Ainda rejeitamos a normalidade dos resíduos, ou seja, o modelo ainda ainda não capturou complemente a dinâmica dos dados.')
+st.markdown('OBS: Por se tratar de um problema complexo e que envolve muitas variáveis não disponóveis, nenhum dos modelos testados obteve resíduos normais.')
+
+
+
+
+
