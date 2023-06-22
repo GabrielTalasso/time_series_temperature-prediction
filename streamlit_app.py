@@ -76,6 +76,7 @@ with st.sidebar:
     st.markdown("Estas são as abas disponíveis para mais detalhes sobre as análises e modelagem dos dados:")
 
 st.title(':chart_with_upwards_trend: Trabalho Final Séries Temporais' )
+st.error('Aguarde o simbolo de "Running" no canto superior para a visualização completa.')
 st.subheader('Grupo: Gabriel Ukstin Talasso - 235078 ; ....')
 st.markdown("## Visão geral dos dados")
 st.markdown("### Alterne entre as abas para as visualizações")
