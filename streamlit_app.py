@@ -140,14 +140,14 @@ tab1, tab2, tab3, tab4 = st.tabs([ "ACF - Original",
                       "PACF - DIferenciada"])
 with tab1:
     image = Image.open('images/acf.png')
-    st.image(image = image)
+    st.image(image = image, caption='ACF. Teste de Ljung-Box rejeita que são não correlacionados.')
 with tab2:
     image = Image.open('images/pacf.png')
     st.image(image = image)
 
 with tab3:
     image = Image.open('images/acfdiff.png')
-    st.image(image = image)
+    st.image(image = image, caption='ACF. Teste de Ljung-Box rejeita que são não correlacionados. ')
 with tab4:
     image = Image.open('images/pacfdiff.png')
     st.image(image = image)
