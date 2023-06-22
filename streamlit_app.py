@@ -168,7 +168,7 @@ with col3:
 
 st.write('O melhor modelo encontrado foi um SARIMA(1,1,3)(0,1,1)7, que desempenhou melhor nos nossos testes. '+
             'Além disso, o segundo melhor modelo foi um ARIMAX(1,0,1), usando a precipitação do dia anterior e a média da precipitação semanal como covariáveis.')
-st.markdown('OBS: Outros modelos também foram testados mas não mostrados na tabela, os apresentações são os modelos de cada tipo que tiverem melhor desempenho nos testes realizados.')
+st.markdown('OBS: Outros modelos também foram testados mas não mostrados na tabela, os apresentados são os modelos de cada tipo que tiveram melhor desempenho nos testes realizados. Modelos com período sazonal 365 dias ou não bateram os baselines ou demoravam horas para rodar, por isso foram descartados de uma anpalise diária.')
 
 st.markdown('### Diagnóstico do modelo: SARIMA(1,1,3)(0,1,1)7')
 
