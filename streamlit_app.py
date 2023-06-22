@@ -139,24 +139,24 @@ tab1, tab2, tab3, tab4 = st.tabs([ "ACF - Original",
                       "ACF - Diferenciada",
                       "PACF - DIferenciada"])
 with tab1:
-    image = Image.open('acf.png')
+    image = Image.open('images/acf.png')
     st.image(image = image)
 with tab2:
-    image = Image.open('pacf.png')
+    image = Image.open('images/pacf.png')
     st.image(image = image)
 
 with tab3:
-    image = Image.open('acfdiff.png')
+    image = Image.open('images/acfdiff.png')
     st.image(image = image)
 with tab4:
-    image = Image.open('pacfdiff.png')
+    image = Image.open('images/pacfdiff.png')
     st.image(image = image)
 
 st.markdown('### Modelagem')
 st.markdown(' A seguir podemos ver o resulado do teste de diversos modelos, comparados atravez de uma validação cruzada de janela deslizante.')
 st.markdown(' Cada modelo foi testado 30 vezes, predizedo sempre um passo a frente a raiz do erro quadratico médio (RMSE) de cada um pode ser visto na tabela abaixo')
 
-results = pd.read_csv('comparacao_cv_30.csv').T
+results = pd.read_csv('data/comparacao_cv_30.csv').T
 results = results.replace({'Seu ARIMA': 'ARIMA111', 'm5_rmse':'RMSE', 'sarima': 'SARIMA'})
 results.columns = results.iloc[0]
 results = results.drop(results.index[0])
@@ -182,7 +182,7 @@ if c1:
 
 st.markdown('### Diagnóstico do modelo: SARIMA(1,1,3)(0,1,1)7')
 
-image = Image.open('sarima_diags.png')
+image = Image.open('images/sarima_diags.png')
 st.image(image = image, caption='Diagnóstico do modelo. Rejeita-se normalidade dos resíduos à 5%.')
 
 c2 = st.checkbox('Mostrar mais sobre o diagnóstico.', help = 'Clique para mais informações a cerca do diagnóstico do modelo.')
