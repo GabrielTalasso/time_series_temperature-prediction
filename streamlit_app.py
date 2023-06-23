@@ -123,10 +123,8 @@ st.markdown("#### :umbrella_with_rain_drops: Visão geral - Precipitação diár
 tab1, tab2= st.tabs([ "Grafico da Série", 
                       "Matriz de correlação"])
 with tab1:
-    fig = px.line(data['prcp'], title='Precipitação diária - Vancouver', 
-                  labels=({'value':'Precipitação diária', 'time':'Data'}))
-    fig.update_layout(showlegend=False)
-    st.plotly_chart(fig)
+    image = Image.open('images/precip.png')
+    st.image(image = image, caption='Precipitação diária ao longo dos anos.')
 
 with tab2:
     image = Image.open('images/matriz_corr.png')
