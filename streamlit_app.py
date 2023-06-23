@@ -192,9 +192,16 @@ if c2:
     st.markdown('OBS: Por se tratar de um problema complexo e que envolve muitas variáveis não disponíveis, nenhum dos modelos testados obteve resíduos normais.')
 
 
+st.markdown('### Informações ténicas sobre o modelo.')
+
 with open('./models/model_sarima_summary.pickle', 'rb') as file:
     f = pickle.load(file)
+    
 st.write(f)
 
+c3 = st.checkbox('Mais informações sobre os parâmetros do modelo.')
 
+if c3:
+    st.markdown('Acima podemos ver as as estimativas para todos os parâmetros do modelo, além disso é possível visualizar também as principais métricas de performance do modelo estudado, assim os testes comentados anteriormente.')
+    st.markdown('Apesar de parte MA sasonal não se mostrar significativa, ela melhorou a desenpenho do modelo ns testes e por isso for mantida. Lembrando que esse p-valor apresentado se refere a significância da variável dado que todas outras já foram colocadas no modelo.')
 
