@@ -190,7 +190,7 @@ if c0:
     st.markdown('Nesse caso a cidade escolhida foi Vancouver, por conta da quantidade de dados disponíveis e ausência de falahas na coleta (como apresntadas em Campinas em São Paulo).')
     st.markdown('O foco do trabalho é predizer a temperatura média do dia seguinte, usando as temperaturas anteriores e com auxílio da variável precipitação. Outras variáveis não foram consideradas ou por se mostrarem ineficiẽntes, ou por possírem muitos valores faltantes.')
 
-st.markdown('### :calendar: Para um vislumbre da dinâmica dos dados, a seguir podemos ver os seguintes gráficos:')
+st.markdown('### Para um vislumbre da dinâmica dos dados, a seguir podemos ver os seguintes gráficos:')
 
 tab1, tab2, tab3, tab4 = st.tabs([ "ACF - Original", 
                       "PACF - Original",
