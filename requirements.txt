@@ -13,3 +13,4 @@ scipy
 meteostat
 tqdm
 pickle
+PIL
