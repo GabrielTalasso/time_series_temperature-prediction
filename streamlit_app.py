@@ -210,7 +210,7 @@ with tab4:
     image = Image.open('images/pacfdiff.png')
     st.image(image = image)
 
-st.markdown('### :computer: Modelagem')
+st.markdown('### Modelagem')
 st.markdown(' A seguir podemos ver o resulado do teste de diversos modelos, comparados atravez de uma validação cruzada de janela deslizante.')
 st.markdown(' Cada modelo foi testado 30 vezes, predizedo sempre um passo a frente a raiz do erro quadratico médio (RMSE) de cada um pode ser visto na tabela abaixo')
 
@@ -238,7 +238,7 @@ if c1:
                 'Além disso, o segundo melhor modelo foi um ARIMAX(1,0,1), usando a precipitação do dia anterior e a média da precipitação semanal como covariáveis.')
     st.markdown('OBS: Outros modelos também foram testados mas não mostrados na tabela, os apresentados são os modelos de cada tipo que tiveram melhor desempenho nos testes realizados. Modelos com período sazonal 365 dias ou não bateram os baselines ou demoravam horas para rodar, por isso foram descartados de uma anpalise diária.')
 
-st.markdown('### :white_check_mark: Diagnóstico do modelo: SARIMA(1,1,3)(0,1,1)7')
+st.markdown('### Diagnóstico do modelo: SARIMA(1,1,3)(0,1,1)7')
 
 image = Image.open('images/sarima_diags.png')
 st.image(image = image, caption='Diagnóstico do modelo. Rejeita-se normalidade dos resíduos à 5%.')
@@ -250,7 +250,7 @@ if c2:
     st.markdown('OBS: Por se tratar de um problema complexo e que envolve muitas variáveis não disponíveis, nenhum dos modelos testados obteve resíduos normais.')
 
 
-st.markdown('### :clipboard: Informações ténicas sobre o modelo.')
+st.markdown('### Informações ténicas sobre o modelo.')
 
 with open('./models/model_sarima_summary.pickle', 'rb') as file:
     f = pickle.load(file)
