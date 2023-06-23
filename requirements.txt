@@ -1,6 +1,5 @@
 plotly
 matplotlib
-yfinance
 pandas
 numpy
 matplotlib
@@ -14,3 +13,4 @@ meteostat
 tqdm
 pickle
 PIL
+warnings

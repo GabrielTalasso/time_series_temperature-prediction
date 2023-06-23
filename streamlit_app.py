@@ -14,8 +14,6 @@ import pickle
 import streamlit as st
 import pandas as pd
 import numpy as np
-import urllib.request
-import json
 import plotly.express as px
 import matplotlib.pyplot as plt
 import yfinance as yf
@@ -24,49 +22,12 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 from datetime import datetime
-import statsmodels.api as sm
-
-from sklearn.linear_model import LinearRegression
-from statsmodels.tsa.seasonal import seasonal_decompose
-from sklearn.model_selection import TimeSeriesSplit
-from sklearn.metrics import mean_squared_error
-
-from statsforecast.models import HistoricAverage
-from statsforecast.models import Naive
-from statsforecast.models import RandomWalkWithDrift
-from statsforecast.models import SeasonalNaive
-from statsforecast.models import SimpleExponentialSmoothing
-from statsforecast.models import HoltWinters
-from statsforecast.models import AutoARIMA
-from statsforecast.models import ARIMA
-from statsforecast.models import GARCH
-from statsforecast.models import ARCH
-
-from statsmodels.graphics.tsaplots import plot_pacf
-from statsmodels.graphics.tsaplots import plot_acf
-
-from scipy.stats import shapiro
 from datetime import datetime
 import matplotlib.pyplot as plt
 from meteostat import Point, Daily
-
-from statsmodels.graphics.tsaplots import plot_pacf
-from statsmodels.graphics.tsaplots import plot_acf
-from statsmodels.tsa.statespace.sarimax import SARIMAX
-from statsmodels.tsa.holtwinters import ExponentialSmoothing
-from statsmodels.tsa.stattools import adfuller
 import matplotlib.pyplot as plt
-from tqdm import tqdm_notebook
-from itertools import product
-
-from funcoes_modelos import montar_dataframe_temp
-from funcoes_modelos import predict_ARIMA_GARCH
-from funcoes_modelos import return_exog
-
 from PIL import Image
 import plotly.graph_objects as go
-
-
 import warnings
 warnings.filterwarnings('ignore')
 
