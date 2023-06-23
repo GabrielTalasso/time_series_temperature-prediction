@@ -129,21 +129,8 @@ with tab1:
     st.plotly_chart(fig)
 
 with tab2:
-    df_corr = data.corr()
-    fig = go.Figure()
-    fig.add_trace(
-        go.Heatmap(
-            x = df_corr.columns,
-            y = df_corr.index,
-            z = np.array(df_corr),
-            text=df_corr.values,
-            texttemplate='%{text:.2f}'
-        )
-    )
-    fig.update_layout(showlegend=False)
-    st.plotly_chart(fig)
-
-
+    image = Image.open('images/matriz_corr.png')
+    st.image(image = image, caption='Matriz de correlação entre as variáveis usadas')
 
 c0 = st.checkbox('Mais informações sobre os dados.', help = 'Clique para saber mais sobre os dados do projeto.')
 
