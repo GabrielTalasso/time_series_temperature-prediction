@@ -13,6 +13,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from datetime import datetime
 import statsmodels.api as sm
+import pickle
 
 from sklearn.linear_model import LinearRegression
 from statsmodels.tsa.seasonal import seasonal_decompose
@@ -88,4 +89,9 @@ model = model.fit()
 pred = model.forecast(1)
 print(returns.tail(1))
 print(pred)
-print(model.summary())
+
+#model.save('./models/model_sarima.pickle')
+
+
+#print(model.test_normality('jarquebera'))
+#print(model.test_serial_correlation('ljungbox', 10))

@@ -12,3 +12,4 @@ statsforecast
 scipy
 meteostat
 tqdm
+pickle

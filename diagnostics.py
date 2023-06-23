@@ -58,6 +58,8 @@ warnings.filterwarnings('ignore')
 
 from tscv import TimeBasedCV
 
+import pickle
+
 
 #########################################################################
 def read_data():
@@ -89,17 +91,22 @@ returns = data['tavg']
 #plot_pacf(returns.diff(1).dropna(), lags = 400, zero = False)
 #plt.show()
 
-model = sarimax = sm.tsa.statespace.SARIMAX(returns , order=(1,1,3), seasonal_order=(0,1,1,7),
-                                    enforce_stationarity=False, enforce_invertibility=False, freq='D').fit()
+model =  sm.tsa.statespace.SARIMAX(returns , order=(1,1,3), seasonal_order=(0,1,1,7),
+                                    enforce_stationarity=False, enforce_invertibility=False, freq='D')
+model = model.fit()
+
+
+pred = model.forecast(1)
 
 model.plot_diagnostics(figsize=(15, 12))
-plt.show()
+#plt.show()
 
 print(shapiro(model.resid))
 
 print(sm.stats.acorr_ljungbox(model.resid, return_df=True, boxpierce = True))
 
-
+with open('./models/model_sarima_summary.pickle', 'wb') as file:
+    f = pickle.dump(model.summary(), file)
 
 
 

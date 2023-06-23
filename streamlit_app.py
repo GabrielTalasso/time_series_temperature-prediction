@@ -10,7 +10,7 @@
 #st.title("Trabalho final Séries Temporais")
 #
 #st.write("Começo dos testes para criação do DashBoard")
-
+import pickle
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -192,6 +192,9 @@ if c2:
     st.markdown('OBS: Por se tratar de um problema complexo e que envolve muitas variáveis não disponíveis, nenhum dos modelos testados obteve resíduos normais.')
 
 
+with open('./models/model_sarima_summary.pickle', 'rb') as file:
+    f = pickle.load(file)
+st.write(f)
 
 
 
