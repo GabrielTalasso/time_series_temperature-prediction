@@ -95,26 +95,36 @@ st.markdown("#### :bar_chart: Médias móveis -Temperaturas média diária - Van
 
 tab1, tab2, tab3 = st.tabs(['Média Móvel 7', 'Média Móvel 30', 'Média Móvel 300'] )
 with tab1:
-    fig = px.scatter(returns, trendline="rolling", title = 'Média Móvel de 3 dias da temperatura média.',
-                     trendline_options=dict(window=7),
-                      trendline_color_override="red")
-    fig.update_layout(showlegend=False)
-    st.plotly_chart(fig)
+    #fig = px.scatter(returns, trendline="rolling", title = 'Média Móvel de 3 dias da temperatura média.',
+    #                 trendline_options=dict(window=7),
+    #                  trendline_color_override="red")
+    #fig.update_layout(showlegend=False)
+    #st.plotly_chart(fig)
+
+    image = Image.open('images/media7.png')
+    st.image(image = image)
+
 
 with tab2:
-    fig = px.scatter(returns, trendline="rolling",title = 'Média Móvel de 30 dias da temperatura média.',
-                      trendline_options=dict(window=30),
-                       trendline_color_override="red")
-    fig.update_layout(showlegend=False)
-    st.plotly_chart(fig)
+    #fig = px.scatter(returns, trendline="rolling",title = 'Média Móvel de 30 dias da temperatura média.',
+    #                  trendline_options=dict(window=30),
+    #                   trendline_color_override="red")
+    #fig.update_layout(showlegend=False)
+    #st.plotly_chart(fig)
+
+    image = Image.open('images/media30.png')
+    st.image(image = image)
+
 
 
 with tab3:
-    fig = px.scatter(returns, trendline="rolling", title = 'Média Móvel de 300 dias da temperatura média.',
-                     trendline_options=dict(window=300),
-                      trendline_color_override="red")
-    fig.update_layout(showlegend=False)
-    st.plotly_chart(fig)
+    #fig = px.scatter(returns, trendline="rolling", title = 'Média Móvel de 300 dias da temperatura média.',
+    #                 trendline_options=dict(window=300),
+    #                  trendline_color_override="red")
+    #fig.update_layout(showlegend=False)
+    #st.plotly_chart(fig)
+    image = Image.open('images/media300.png')
+    st.image(image = image)
 
 
 st.markdown("#### :umbrella_with_rain_drops: Visão geral - Precipitação diária - Vancouver")
