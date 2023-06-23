@@ -87,7 +87,7 @@ st.markdown("### Alterne entre as abas para as visualizações!")
 @st.cache_data # 👈 Add the caching decorator
 def read_data():
         # Set time period
-    start = datetime(2010, 1, 1)
+    start = datetime(2017, 1, 1)
     end = pd.to_datetime(datetime.now().strftime("%Y-%m-%d"))
     # Create Point for Vancouver, BC
     vancouver = Point(49.2497, -123.1193, 70)
