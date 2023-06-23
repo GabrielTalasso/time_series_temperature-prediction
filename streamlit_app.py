@@ -84,7 +84,7 @@ st.markdown('Grupo: Gabriel Ukstin Talasso - 235078 ; Tiago Henrique Silva Monte
 st.markdown("## Visão geral dos dados")
 st.markdown("### Alterne entre as abas para as visualizações!")
 
-@st.cache_data  # 👈 Add the caching decorator
+@st.cache_data # 👈 Add the caching decorator
 def read_data():
         # Set time period
     start = datetime(2010, 1, 1)
@@ -102,6 +102,7 @@ def read_data():
     return data
 
 data = read_data()
+
 returns = data['tavg']
 
 if data not in st.session_state:
