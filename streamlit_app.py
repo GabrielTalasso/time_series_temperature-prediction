@@ -120,7 +120,7 @@ with tab3:
 st.markdown("#### :umbrella_with_rain_drops: Visão geral - Precipitação diária - Vancouver")
 
 
-tab1, tab2= st.tabs([ "Grafico da Série", 
+tab1, tab2= st.tabs([ "Grafico da Precipitação", 
                       "Matriz de correlação"])
 with tab1:
     image = Image.open('images/precip.png')
