@@ -11,6 +11,5 @@ statsforecast
 scipy
 meteostat
 tqdm
-pickle
 PIL
 warnings
