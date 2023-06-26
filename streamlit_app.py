@@ -36,11 +36,12 @@ st.set_page_config('Séries Tempoais', page_icon=	':chart_with_upwards_trend:')
 with st.sidebar:
     st.markdown("# ME607")
     st.markdown("A seguir podem ser encontrados alguns links útis referente ao trabalho aqui apresentado:")
-    st.markdown('[Github](https://github.com/GabrielTalasso/trabalho-series)')
+    st.markdown('[Github dessa aplicação.](https://github.com/GabrielTalasso/trabalho-series)')
+    st.markdown('[Github da automação.](https://github.com/Marcosgrosso/automation_series)')
 
 st.title(':chart_with_upwards_trend: Trabalho Final Séries Temporais' )
 st.error('Aguarde o simbolo de "Running" no canto superior para a visualização completa.')
-st.markdown('Grupo: Gabriel Ukstin Talasso - 235078 ; Tiago Henrique Silva Monteiro - 217517....')
+st.markdown('Grupo: Gabriel Ukstin Talasso - 235078 ; Tiago Henrique Silva Monteiro - 217517 ; Marcos José Grosso Filho - 236226 ')
 st.markdown("## Visão geral dos dados")
 st.markdown("### Alterne entre as abas para as visualizações!")
 
@@ -169,6 +170,7 @@ with tab4:
     st.image(image = image)
 
 st.markdown('### :computer: Modelagem')
+st.error('A modelagem e diagnósticos aqui postos são estáticos, porém o modelo de predição em produção é atualizado e retreinado todos os dias!')
 st.markdown(' A seguir podemos ver o resulado do teste de diversos modelos, comparados atravez de uma validação cruzada de janela deslizante.')
 st.markdown(' Cada modelo foi testado 30 vezes, predizedo sempre um passo a frente a raiz do erro quadratico médio (RMSE) de cada um pode ser visto na tabela abaixo')
 
