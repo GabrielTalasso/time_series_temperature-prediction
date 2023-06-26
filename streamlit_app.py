@@ -63,6 +63,7 @@ def read_data():
 
 data = read_data()
 
+
 returns = data['tavg']
 
 if data not in st.session_state:
