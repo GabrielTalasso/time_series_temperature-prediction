@@ -70,7 +70,7 @@ returns = data['tavg']
 if data not in st.session_state:
     st.session_state['df'] = data
 
-st.markdown("#### :mostly_sunny: Visão geral -Temperaturas média diária - Vancouver")
+st.markdown("#### :mostly_sunny: Visão geral -Temperatura média diária - Vancouver")
 
 tab1, tab2, tab3 = st.tabs([ "Grafico da Série", 
                       "Grafico Diferenciada",
@@ -91,7 +91,7 @@ with tab2:
 with tab3:
     st.write(data.tail(10))
 
-st.markdown("#### :bar_chart: Médias móveis -Temperaturas média diária - Vancouver")
+st.markdown("#### :bar_chart: Médias móveis -Temperatura média diária - Vancouver")
 
 
 tab1, tab2, tab3 = st.tabs(['Média Móvel 7', 'Média Móvel 30', 'Média Móvel 300'] )
@@ -146,8 +146,8 @@ c0 = st.checkbox('Mais informações sobre os dados.', help = 'Clique para saber
 if c0:
 
     st.markdown('Esses dados foram coletados a partir da biblioteca meteostat, do python, que fornece informações acerca do clima de diversos pontos do mundo.')
-    st.markdown('Nesse caso a cidade escolhida foi Vancouver, por conta da quantidade de dados disponíveis e ausência de falahas na coleta (como apresntadas em Campinas em São Paulo).')
-    st.markdown('O foco do trabalho é predizer a temperatura média do dia seguinte, usando as temperaturas anteriores e com auxílio da variável precipitação. Outras variáveis não foram consideradas ou por se mostrarem ineficiẽntes, ou por possírem muitos valores faltantes.')
+    st.markdown('Nesse caso a cidade escolhida foi Vancouver, por conta da quantidade de dados disponíveis e ausência de falhas na coleta (como apresntadas em Campinas em São Paulo).')
+    st.markdown('O foco do trabalho é predizer a temperatura média do dia seguinte, usando as temperaturas anteriores e com auxílio da variável precipitação. Outras variáveis não foram consideradas ou por se mostrarem ineficiêntes, ou por possuírem muitos valores faltantes.')
 
 st.markdown('### :calendar: Para um vislumbre da dinâmica dos dados, a seguir podemos ver os seguintes gráficos:')
 
@@ -171,7 +171,7 @@ with tab4:
 
 st.markdown('### :computer: Modelagem')
 st.error('A modelagem e diagnósticos aqui postos são estáticos, porém o modelo de predição em produção é atualizado e retreinado todos os dias!')
-st.markdown(' A seguir podemos ver o resulado do teste de diversos modelos, comparados atravez de uma validação cruzada de janela deslizante.')
+st.markdown(' A seguir podemos ver o resulado do teste de diversos modelos, comparados através de uma validação cruzada de janela deslizante.')
 st.markdown(' Cada modelo foi testado 30 vezes, predizedo sempre um passo a frente a raiz do erro quadratico médio (RMSE) de cada um pode ser visto na tabela abaixo')
 
 results = pd.read_csv('data/comparacao_cv_30.csv').T
