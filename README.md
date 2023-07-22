@@ -10,7 +10,7 @@ Authors: Gabriel Ukstin Talasso, Marcos José Grosso Filho e Tiago Henrique Silv
 
 The data was obtained using the "meteostat" python library, that provides data about the climate on several cities of the world. In this project we use the Vancouver climate data, because this city there is no missing data in the period.
 
-The main focus of this project is predict the average temperature of the next day, using the previous information like temperatures and precipitation. Other variables were considerated but proved to be inefficient, or because they had many missing values.
+The main focus of this project is predict the average temperature of the next day, using the previous information like temperatures and precipitation. Other variables were considered but proved to be inefficient, or because they had many missing values.
 
 Futhermore, this project contains an `streamli_app.py` ([link](https://gabrieltalasso-trabalho-series-streamlit-app-vug9p4.streamlit.app/)) that shows all resuts of the project. And the code to automate the sending of emails with the daily analyzes (the second part of the project) can be found at [this Github](https://github.com/Marcosgrosso/automation_series). The model used on this this automatic forecast is in `predict_model.py`.
 
