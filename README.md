@@ -1,7 +1,18 @@
-# Trabalho Séries Temporais - 1S 2023
+## Time Series Modeling and Automatizating 
 
-### Esse repositório armazena os principais códigos responsáveis pela análise, modelagem e diagóstico de uma série temporal.
+Authors: Gabriel Ukstin Talasso, Marcos José Grosso Filho e Tiago Henrique Silva Monteiro.
 
-Esses dados foram coletados a partir da biblioteca meteostat, do python, que fornece informações acerca do clima de diversos pontos do mundo. Nesse caso a cidade escolhida foi Vancouver, por conta da quantidade de dados disponíveis e ausência de falhas na coleta (como apresntadas em Campinas em São Paulo).
+#### This repository contains the codes for a complete workflow on a time series project: analisys, modeling and the diagnostics of temporal data.
 
-O foco do trabalho é predizer a temperatura média do dia seguinte, usando as temperaturas anteriores e com auxílio da variável precipitação. Outras variáveis não foram consideradas ou por se mostrarem ineficiêntes, ou por possuírem muitos valores faltantes.
+The data was obtained using the "meteostat" python library, that provides data about the climate on several cities of the world. In this project we use the Vancouver climate data, because this city there is no missing data in the period.
+
+The main focus of this project is predict the average temperature of the next day, using the previous information like temperatures and precipitation. Other variables were considerated but proved to be inefficient, or because they had many missing values.
+
+Futhermore, this project contains an `streamli_app.py` ([link](https://gabrieltalasso-trabalho-series-streamlit-app-vug9p4.streamlit.app/)) that shows all resuts of the project. And the code to automate the sending of emails with the daily analyzes (the second part of the project) can be found at [this Github](https://github.com/Marcosgrosso/automation_series). The model used on this this automatic forecast is in `predict_model.py`.
+
+The choice of the model was made in `experiments.py` using a Time Series Cross Validation (`tscv.py`) and validate in `diagnostics.py`.
+
+
+
+
+
