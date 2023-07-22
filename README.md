@@ -4,7 +4,7 @@ Authors: Gabriel Ukstin Talasso, Marcos José Grosso Filho e Tiago Henrique Silv
 
 #### This repository contains the codes for a complete workflow on a time series project: analisys, modeling and the diagnostics of temporal data.
 
-<img src="https://github.com/GabrielTalasso/trabalho-series/assets/75808460/201dbb79-04fa-429f-b228-24f3adb71dbe" align="right" width="600">
+<img src="https://github.com/GabrielTalasso/trabalho-series/assets/75808460/201dbb79-04fa-429f-b228-24f3adb71dbe" align="center" width="600">
 
 
 The data was obtained using the "meteostat" python library, that provides data about the climate on several cities of the world. In this project we use the Vancouver climate data, because this city there is no missing data in the period.
