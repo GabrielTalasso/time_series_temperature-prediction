@@ -7,6 +7,7 @@ Authors: Gabriel Ukstin Talasso, Marcos José Grosso Filho e Tiago Henrique Silv
 <img src="https://github.com/GabrielTalasso/trabalho-series/assets/75808460/201dbb79-04fa-429f-b228-24f3adb71dbe" align="center" width="600">
 
 
+
 The data was obtained using the "meteostat" python library, that provides data about the climate on several cities of the world. In this project we use the Vancouver climate data, because this city there is no missing data in the period.
 
 The main focus of this project is predict the average temperature of the next day, using the previous information like temperatures and precipitation. Other variables were considerated but proved to be inefficient, or because they had many missing values.
