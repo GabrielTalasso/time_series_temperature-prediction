@@ -2,7 +2,7 @@
 
 Authors: Gabriel Ukstin Talasso, Marcos José Grosso Filho e Tiago Henrique Silva Monteiro.
 
-#### This repository contains the codes for a complete workflow on a time series project: analisys, modeling and the diagnostics of temporal data.
+#### This repository contains the codes for a complete workflow on a time series project: analysis, modeling and the diagnostics of temporal data.
 
 <img src="https://github.com/GabrielTalasso/trabalho-series/assets/75808460/201dbb79-04fa-429f-b228-24f3adb71dbe" align="center" width="600">
 
